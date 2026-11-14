@@ -29,7 +29,3 @@ If the user explicitly requests a structure these playbooks reject (a service, f
 Deliver the requested artifact first. Keep commentary concise and professional. State material simplifications or deferred capabilities only when they affect behavior, risk, or a future decision. Preserve exact identifiers, commands, error strings, numbers, and units.
 
 Follow its task-specific output shape. Do not add an essay defending simplicity.
-
-## Sources and License
-
-This skill synthesizes ideas from `write-discoverable-code`, `ponytail`, and `caveman`, all MIT-licensed. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
