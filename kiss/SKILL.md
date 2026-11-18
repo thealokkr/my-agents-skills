@@ -1,9 +1,9 @@
 ---
 name: "kiss"
 description: "Prevent AI-generated over-engineering and hard-to-read code during software design, implementation, refactoring, and code review. KISS (Keep It Simple, Stupid): use when choosing or designing an architecture, writing or changing code, reviewing a diff, naming symbols, reducing boilerplate, or when the user asks for simple, minimal, boring, discoverable, human-readable code."
-version: 1
+version: 4
 created: "2026-08-15"
-updated: "2026-08-22"
+updated: "2026-11-18"
 ---
 ## When to Use
 Use for software design, implementation, refactoring, debugging, naming, and review. KISS means choosing the smallest clear solution that satisfies current requirements, not minimizing characters or sacrificing correctness.
@@ -23,9 +23,15 @@ Never simplify away correctness, explicit requirements, trust-boundary validatio
 
 Add abstractions only for current duplication or variation when they make the system easier to understand. Do not build for hypothetical futures.
 
+Declare the smallest structure a current requirement needs before writing any body: signatures, data shapes, and boundaries. Then implement inside it; when changing existing code, change the declaration before the bodies. Applies to functions, types, and modules as well as classes. Keep this internal and add no layers in either phase.
+
 If the user explicitly requests a structure these playbooks reject (a service, framework, plugin system, or configuration point), name the simpler alternative and its trade-off, then let the user decide. Do not silently comply or silently refuse.
 
 ## Output Contract
 Deliver the requested artifact first. Keep commentary concise and professional. State material simplifications or deferred capabilities only when they affect behavior, risk, or a future decision. Preserve exact identifiers, commands, error strings, numbers, and units.
 
 Follow its task-specific output shape. Do not add an essay defending simplicity.
+
+## Sources and License
+
+This skill synthesizes ideas from `write-discoverable-code`, `ponytail`, and `caveman`, all MIT-licensed. 

@@ -6,7 +6,7 @@ Write the smallest clear change that fixes the real problem and fits the codebas
 
 ## Core Loop
 
-1. Read the target code and tests, understand the requirement, trace callers and sibling paths, and define what must remain unchanged.
+1. Read the target code and tests, understand the requirement, trace callers and sibling paths, and define what must remain unchanged. In files handling untrusted input, persistence, security, or external calls, list the concrete constraints that must survive before deleting anything: validation codes, trust boundaries, atomicity, timeouts, and retries.
 2. Find the root cause and its narrowest shared owner. Prefer deleting or avoiding work before adding a mechanism.
 3. Reuse an existing project pattern, then the standard library, native platform or database, then an installed dependency.
 4. Add minimal custom code only when those options fail. Require demonstrated benefit for a new dependency or service.
@@ -15,6 +15,10 @@ Write the smallest clear change that fixes the real problem and fits the codebas
 
 Small does not mean local: one correction at the shared owner is simpler than duplicated guards in callers.
 
+## Structure Before Behavior
+
+Apply the structure-first invariant from SKILL.md: declare signatures with parameters, return, and errors, plus data shapes and boundaries, before writing bodies; when changing code, change the declaration before the bodies. It applies to functions, types, and modules, not just classes. A declaration does not license an extra layer — interfaces and factories still need current variation. Keep this step internal.
+
 ## Code Rules
 
 - Keep the diff focused. Do not mix unrelated cleanup into the change.
@@ -22,9 +26,9 @@ Small does not mean local: one correction at the shared owner is simpler than du
 - Keep related behavior together. Do not create one file per trivial helper.
 - Preserve project conventions and familiar language idioms. Isolate required framework mechanics behind a clear boundary.
 - Keep state changes and side effects visible. Use named intermediate values when they clarify intent, expose state, or provide useful breakpoints.
-- Keep control-flow nesting (`for`, `if`, `while`, `try`, `with`) within two levels; split deeper logic into focused helpers with clear data flow.
+- Keep control-flow nesting (loops, conditionals, exception handling, scoped blocks) within two levels; split deeper logic into focused helpers with clear data flow.
 - Give each function, class, and logic block a short comment explaining what and why, without narrating individual statements.
-- Weave what and why naturally into docstrings and comments; do not add separate `Why:` or `Example:` headings. Examples must cover each relevant supported language: Java, TypeScript/JavaScript, and Python.
+- Weave what and why naturally into docstrings and comments; do not add separate `Why:` or `Example:` headings. When examples are needed, cover every language the project uses.
 - Keep complete event names, flags, error codes, and diagnostic prefixes as searchable literals.
 - Add a dependency only when maintained behavior is materially safer or smaller than owned code, considering transitive cost, security, runtime footprint, and project conventions.
 
